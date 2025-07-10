@@ -1,0 +1,9 @@
+.movie-list-page {
+  padding: 16px;
+}
+
+.movie-list-page__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

@@ -5,13 +5,15 @@ import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/movies" replace />} />
-      <Route path="/movies" element={<MovieListPage />} />
-      <Route path="/movies/:id" element={<MovieDetailPage />} />
-      <Route path="/favorites" element={<FavoritesPage />} />
-      <Route path="*" element={<div>404 Not Found</div>} />
-    </Routes>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Navigate to="/movies" replace />} />
+        <Route path="/movies" element={<MovieListPage />} />
+        <Route path="/movies/:id" element={<MovieDetailPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="*" element={<div>404 - Страница не найдена</div>} />
+      </Routes>
+    </div>
   );
 }
 

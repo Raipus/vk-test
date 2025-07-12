@@ -1,11 +1,14 @@
 import axios from "axios";
 import type { MovieListResponse, MovieDetail } from "./types";
+import qs from 'qs';
 
 const api = axios.create({
   baseURL: "https://api.kinopoisk.dev/v1.4",
   headers: {
     "X-API-KEY": import.meta.env.VITE_KINOPOISK_API_KEY,
   },
+  paramsSerializer: params =>
+    qs.stringify(params, { arrayFormat: 'repeat' })
 });
 
 export interface MovieListParams {

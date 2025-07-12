@@ -1,0 +1,12 @@
+.movie-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    min-width: 95%;
+}
+
+.movie-filters__buttons {
+    display: flex;
+    justify-content: space-between;
+}

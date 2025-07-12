@@ -10,21 +10,22 @@ export class MovieStore {
   movies: MovieShort[] = [];
   total = 0;
   page = 0;
-  pages = 2;
+  pages = 1;
   isLoadingList = false;
+  errorList: string | null = null;
 
   currentMovie: MovieDetail | null = null;
   isLoadingDetail = false;
+  errorDetail: string | null = null;
 
   filters: MovieListParams["filters"] = {};
-
-  errorList: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
   async loadMovies(initialFilters: MovieListParams["filters"] = {}) {
+    this.movies = [];
     this.errorList = null;
     this.isLoadingList = true;
     this.page = 1;
@@ -65,6 +66,10 @@ export class MovieStore {
         this.movies.push(...res.data.docs);
         this.page = nextPage;
       });
+    } catch (e: any) {
+    runInAction(() => {
+      this.errorList = e.message || "Не удалось загрузить дальше список фильмов";
+    });
     } finally {
       runInAction(() => {
         this.isLoadingList = false;
@@ -78,6 +83,10 @@ export class MovieStore {
       const res = await fetchMovieById(id);
       runInAction(() => {
         this.currentMovie = res.data;
+      });
+    } catch (e: any) {
+      runInAction(() => {
+        this.errorDetail = e.message || "Не удалось загрузить информацию о фильме";
       });
     } finally {
       runInAction(() => {

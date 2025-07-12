@@ -1,5 +1,8 @@
 .movie-list-page {
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60vw;
 }
 
 .movie-list-page__grid {

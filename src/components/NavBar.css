@@ -1,0 +1,19 @@
+.nav-bar {
+    width: 100%;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    background-color: #1976d2;
+    height: 50px;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+}
+
+.nav-bar__items:hover {
+    transition: transform 0.2s;
+    transform: scale(1.03);
+}

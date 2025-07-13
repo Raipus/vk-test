@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress, Box } from "@mui/material";
 import { useStores } from "../hooks/useStores";
 import MovieCard from "../components/MovieCard";
 import "./MovieListPage.css";
-import MovieFilters, { type MovieFilterValues } from "../components/MovieFilters";
+import MovieFilters, {
+  type MovieFilterValues,
+} from "../components/MovieFilters";
 import { buildKinopoiskFilters } from "../utils/buildKinopoiskFilters";
 import { useSearchParams } from "react-router-dom";
 
@@ -13,29 +15,29 @@ const MovieListPage: React.FC = observer(() => {
   const { movieStore } = useStores();
   const [searchParams] = useSearchParams();
 
-  const loadWithURLFilters = () => {
+  const loadWithURLFilters = useCallback(() => {
     const values: MovieFilterValues = {
-      genres: searchParams.get('genres')?.split(',') || [],
+      genres: searchParams.get("genres")?.split(",") || [],
       rating: [
-        Number(searchParams.get('ratingFrom') || 0),
-        Number(searchParams.get('ratingTo')   || 10),
+        Number(searchParams.get("ratingFrom") || 0),
+        Number(searchParams.get("ratingTo") || 10),
       ],
       year: [
-        Number(searchParams.get('yearFrom') || 1874),
-        Number(searchParams.get('yearTo')   || 2050),
+        Number(searchParams.get("yearFrom") || 1874),
+        Number(searchParams.get("yearTo") || 2050),
       ],
     };
 
     const apiParams = {
-      ...buildKinopoiskFilters(values)
+      ...buildKinopoiskFilters(values),
     };
 
     movieStore.loadMovies(apiParams);
-  };
+  }, [movieStore, searchParams]);
 
   useEffect(() => {
     loadWithURLFilters();
-  }, [searchParams.toString()]);
+  }, [loadWithURLFilters]);
 
   return (
     <div className="movie-list-page">

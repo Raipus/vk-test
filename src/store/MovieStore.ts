@@ -41,9 +41,11 @@ export class MovieStore {
         this.total = res.data.total;
         this.pages = res.data.pages;
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
+      const msg =
+        e instanceof Error ? e.message : "Не удалось загрузить список фильмов";
       runInAction(() => {
-        this.errorList = e.message || "Не удалось загрузить список фильмов";
+        this.errorList = msg;
       });
     } finally {
       runInAction(() => {
@@ -66,10 +68,14 @@ export class MovieStore {
         this.movies.push(...res.data.docs);
         this.page = nextPage;
       });
-    } catch (e: any) {
-    runInAction(() => {
-      this.errorList = e.message || "Не удалось загрузить дальше список фильмов";
-    });
+    } catch (e: unknown) {
+      const msg =
+        e instanceof Error
+          ? e.message
+          : "Не удалось загрузить дальше список фильмов";
+      runInAction(() => {
+        this.errorList = msg;
+      });
     } finally {
       runInAction(() => {
         this.isLoadingList = false;
@@ -84,9 +90,13 @@ export class MovieStore {
       runInAction(() => {
         this.currentMovie = res.data;
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
+      const msg =
+        e instanceof Error
+          ? e.message
+          : "Не удалось загрузить информацию о фильме";
       runInAction(() => {
-        this.errorDetail = e.message || "Не удалось загрузить информацию о фильме";
+        this.errorDetail = msg;
       });
     } finally {
       runInAction(() => {

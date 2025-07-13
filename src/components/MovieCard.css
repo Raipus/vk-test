@@ -6,6 +6,7 @@
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s;
+  position: relative;
 }
 .movie-card:hover {
   transform: scale(1.03);
@@ -29,4 +30,14 @@
   font-size: 0.875rem;
   color: #555;
   margin: 0;
+}
+.movie-card__favorite {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.movie-card__favorite:hover {
+  transition: transform 0.2s;
+  transform: scale(1.15);
 }

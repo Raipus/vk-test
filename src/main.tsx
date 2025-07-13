@@ -6,10 +6,11 @@ import "./index.css";
 
 import { StoreContext } from "./store/StoreContext";
 import movieStore from "./store/MovieStore";
+import favoriteStore from "./store/FavoriteStore";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <StoreContext.Provider value={{ movieStore }}>
+    <StoreContext.Provider value={{ movieStore, favoriteStore }}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
